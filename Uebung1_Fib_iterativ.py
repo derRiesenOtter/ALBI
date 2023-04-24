@@ -19,6 +19,8 @@ def fibonacci (x):
         prev = helper
     return current
 
+# Komplexität O(n)
+
 # Testteil
 
 class Test_Fibonacci(unittest.TestCase):
