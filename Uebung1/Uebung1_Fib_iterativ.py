@@ -31,7 +31,7 @@ class Test_Fibonacci(unittest.TestCase):
     def test_InputHandling_Float(self):
         self.assertEqual(fibonacci(3.5), 2), "Result should be 2"
     def test_Result(self):
-        self.assertEqual (fibonacci(6), 8), "Result should be 8"
+        self.assertEqual (fibonacci(20), 6765), "Result should be 8"
     
 if __name__ == "__main__":
     unittest.main()
