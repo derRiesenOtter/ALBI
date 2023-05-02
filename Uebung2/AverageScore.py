@@ -1,45 +1,24 @@
-import unittest
+import unittest # unklar, wie man das hier am besten implementieren sollte
 import numpy as np
 import pandas as pd
 
 def createAverageScoreProfile():
-    testSequences = readInputSequences("Uebung2/TestSequences.txt")
-    scoreMatrix = readScoreMatrix("Uebung2/BLOSUM62.txt")
-    matrix = createMatrix(len(testSequences.columns))
+    testSequences = pd.read_csv("Uebung2/TestSequences.txt", delim_whitespace= True)
+    scoreMatrix = pd.read_csv("Uebung2/BLOSUM62.txt", delim_whitespace = True)
+    matrix = pd.DataFrame(np.zeros([21,len(testSequences.columns)]), index = ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', '-'])
     relativeFrequencyTable = calculateRelativeFrequencyTable(matrix, testSequences)
     averageScoreProfile = calculateAverageScoreProfile(relativeFrequencyTable, scoreMatrix)
     print(averageScoreProfile)
     return averageScoreProfile
-    
-def readInputSequences(dataPath):
-    testSequences = pd.read_csv(dataPath, delim_whitespace= True)
-    #print(testSequences)
-    return testSequences
-
-def readScoreMatrix(dataPath):
-    scoreMatrix = pd.read_csv(dataPath, delim_whitespace = True)
-    #print(scoreMatrix)
-    return scoreMatrix
-
-def createMatrix(length):
-    matrixArray = np.zeros([21,length])
-    matrix = pd.DataFrame(matrixArray, index = ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', '-'])
-    #for col in range (length):
-    #    for row in range(21):
-    #        matrix[col][row] = 1
-    #print(matrix)
-    return matrix
 
 def calculateRelativeFrequencyTable(matrix, testSequences):
-    relativeFrequencyTable = matrix
+    relativeFrequencyTable = matrix.copy()
     for col in range (len(testSequences.columns)):
         for row in range (len(testSequences)):
             relativeFrequencyTable.at[(testSequences.iat[row,col]), col] += 1
-    #print(relativeFrequencyTable)
     for col in range (len(relativeFrequencyTable.columns)):
         for row in range (len(relativeFrequencyTable)):
             relativeFrequencyTable.iat[row, col] /= len(testSequences)
-    #print(relativeFrequencyTable)
     return relativeFrequencyTable
     
 def calculateAverageScoreProfile(relativeFrequencyTable, scoreMatrix):
