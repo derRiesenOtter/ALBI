@@ -1,0 +1,25 @@
+  1 2 3 4 5 6 7 8 9 10
+1 I W P D D E K P - - 
+2 I W P D H E K P - -
+3 I W P D H E K P N Y
+4 I W P D H E K P - -
+5 I W P D H E K P N -
+6 I W P D N E K P N -
+7 I W P D D E K P - -
+8 I W P D D E K P - -
+9 V W P D E E K A - -
+10 I W P D N E K P - -
+11 V W P D N E K P - -
+12 I W P E G E R P - -
+13 I W P D D E K P - -
+14 I W P E G E S P - -
+15 I W P E G E S P - -
+16 I W P E G E S P - -
+17 I W P A E E S P - -
+18 I W P D D E K P - -
+19 I W P D E E K P - -
+20 V W P D H E K P - -
+21 V W P D E F K A - -
+22 I W P D E F K A - -
+23 I W S E K F E A - -
+
