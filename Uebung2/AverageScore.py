@@ -1,12 +1,11 @@
-import unittest # unklar, wie man das hier am besten implementieren sollte
 import numpy as np
 import pandas as pd
 
 def createAverageScoreProfile():
-    testSequences = pd.read_csv("Uebung2/TestSequences.txt", delim_whitespace= True)
+    msa = pd.read_csv("Uebung2/TestSequences.txt", delim_whitespace= True) 
     scoreMatrix = pd.read_csv("Uebung2/BLOSUM62.txt", delim_whitespace = True)
-    matrix = pd.DataFrame(np.zeros([21,len(testSequences.columns)]), index = ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', '-'])
-    relativeFrequencyTable = calculateRelativeFrequencyTable(matrix, testSequences)
+    matrix = pd.DataFrame(np.zeros([21,len(msa.columns)]), index = ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', '-'])
+    relativeFrequencyTable = calculateRelativeFrequencyTable(matrix, msa)
     averageScoreProfile = calculateAverageScoreProfile(relativeFrequencyTable, scoreMatrix)
     print(averageScoreProfile)
     return averageScoreProfile
@@ -31,5 +30,5 @@ def calculateAverageScoreProfile(relativeFrequencyTable, scoreMatrix):
             for row2 in range (len(resultMatrix)):
                 resultMatrix.iat[row, col] += relativeFrequencyTable.iat[row2, col] * scoreMatrix.at[relativeFrequencyTable.index.tolist()[row], relativeFrequencyTable.index.tolist()[row2]]
     return resultMatrix
-
+#language server protocol
 createAverageScoreProfile()
