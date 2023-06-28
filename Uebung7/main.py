@@ -1,5 +1,4 @@
-from Sequence import Sequence
-from CreateSequenceArray import CreateSequenceArray 
+from Sequence import Sequence 
 import pandas as pd
 from CreatedeBruijnMatrix import CreatedeBruijnMatrix 
 from SearchPaths import SearchPaths
@@ -9,13 +8,13 @@ def main():
     print('')
     # set k to 2
     # give following filename ALBI_SS23_7_Uebung.fasta
-
+    
     ######################
 
     # exercise 1 and 2 see Sequence and createSequenceArray
     print("Set k value:")
     k = int(input())
-    sequences = CreateSequenceArray.createSequenceArray()
+    sequences = Sequence.createSequenceArray()
     # print(sequences)
 
     ######################

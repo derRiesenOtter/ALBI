@@ -1,5 +1,4 @@
 from Sequence import Sequence
-from CreateSequenceArray import CreateSequenceArray 
 import pandas as pd
 from CreatedeBruijnMatrix import CreatedeBruijnMatrix
 
