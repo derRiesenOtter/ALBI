@@ -13,26 +13,45 @@ class SearchPaths:
             for column in range(len(matrix.matrix.columns)):
                 # for all sequences, that have a number higher 0
                 if (matrix.matrix.iat[row, column] > 0):
+                    # create a list containing the sequence (row)
                     currentPath = [0, matrix.matrix.index[row]]
+                    # create a list containing a False value for every sequence 
+                    # and set the current on True
                     visited = []
                     for i in range(len(matrix.matrix.index)):
                         visited.append(False)
                     visited[row] = True
+                    # now we will start a recursive approach to 
+                    # find all possible paths with our sPaths 
+                    # method starting at our current position
                     allPaths.append(SearchPaths.sPaths(matrix, column, row, currentPath, visited))
         return SearchPaths.cleanUpPaths(allPaths)
+        # before we return our paths we have to clean them up with our cleanUpPaths method, 
+        # currently they are in a big messy nested list that is difficult to work with
+        # this problem probably could have been solved in a better way...
         
     def sPaths(matrix, previousColumn, previousRow, previousPath, visited):
+        # create a new list
         returnedPaths = []
+        # the current position gets added to the previous path
         previousPath.append(matrix.matrix.index[previousColumn])
+        # the score of the assembly gets added to the previous paths score
         previousPath[0] += matrix.matrix.iat[previousRow, previousColumn]
+        # the current position gets visited == true
         visited[previousColumn] = True
+        # this new path is stored in the returned paths list
         returnedPaths.append(previousPath)
+        # the current row is traversed
         for currentColumn in range(len(matrix.matrix.columns)):
+            # for every number greater one that represents a sequence that hasn't been used 
+            # the current path gets appended with a new path and recursively with their new paths etc. ...
             if (matrix.matrix.iat[previousColumn, currentColumn] > 0 and visited[currentColumn] == False):
                 returnedPaths.append(SearchPaths.sPaths(matrix, currentColumn, previousColumn, previousPath.copy(), visited.copy()))
         return returnedPaths
     
     def cleanUpPaths(allPaths):
+        # this method cleans up the nested list created with 
+        # the searchpaths method recursively with a deep search
         newPath = []
         for i in range(len(allPaths)):
             SearchPaths.cUpPaths(newPath, allPaths[i])
@@ -47,6 +66,7 @@ class SearchPaths:
 
     @staticmethod
     def lenHigher3(path, matrix, sequences):
+        # this method simply looks for assemblys longer than 3
         counter = 0
         for i in range(len(path)):
             if (len(path[i]) > 3):
@@ -57,10 +77,13 @@ class SearchPaths:
     
     @staticmethod
     def superString(seq, matrix, sequences):
+        # this method concatenates the reads while cutting away the aligned 
+        # bases using the score of the deBruijn matrix
         superString = ''
         for i in range(1, len(seq)-1):
             superString += (sequences[int(seq[i][1:])-1].sequence[:-1 + int(-matrix.matrix[seq[i+1]][seq[i]])])
         superString += (sequences[int(seq[len(seq)-1][1:])-1].sequence[:-1])
+        # this is just formatting
         while(len(superString) < 24):
             superString += ' '
         superString += '\t score: ' + str(seq[0]) + '\tsequences: '
@@ -70,6 +93,7 @@ class SearchPaths:
         return superString
     
     def bestsuperStrings(paths, matrix, sequences):
+        # this method simply searches for the paths with the highest scores
         best = []
         maximum = 0
         for i in range(len(paths)):
@@ -80,6 +104,7 @@ class SearchPaths:
                 best.append(paths[i])
         for i in range(len(best)):
             print(SearchPaths.superString(best[i], matrix, sequences))
+        return SearchPaths.superString(best[i], matrix, sequences)
 
     # def eliminateDuplicates(paths):
     #     newPath = []
