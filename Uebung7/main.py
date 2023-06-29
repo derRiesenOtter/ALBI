@@ -56,6 +56,6 @@ class TestEverything(unittest.TestCase):
         self.assertEqual (SearchPaths.bestsuperStrings(SearchPaths.searchPaths(CreatedeBruijnMatrix(Sequence.createSequenceList(), 2)), CreatedeBruijnMatrix(Sequence.createSequenceList(), 2), Sequence.createSequenceList())[:20], "TAAATTTCTCCTCCTCTGGT")
 
 if __name__ == "__main__":
-    # main()
-    unittest.main()
+    main()
+    #unittest.main()
 
